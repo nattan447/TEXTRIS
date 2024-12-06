@@ -6,7 +6,6 @@ class Partida :
     def __init__(self,nome_jogador):
         self.nome_jogador = nome_jogador
         self.pontuacao = 0
-        self.bloco_atual = None #bloco que esta em execucao na partida
     
 
 
@@ -34,11 +33,15 @@ class Partida :
 
 
         while True:
-
+        
             self.__mostrar_infos()  
             tecla = readkey()
-            if(tecla=="a"):
-                print("apertou a ")
+            if(tecla==key.LEFT):
+                tela.mover_esquerda()
+            elif (tecla==key.RIGHT):
+                tela.mover_direta()
+            elif (tecla==key.DOWN):
+                tela.mover_baixo()
       
 
 

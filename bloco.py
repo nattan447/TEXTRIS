@@ -10,8 +10,11 @@ class Bloco:
         pass
 
    
-
-
+    def rotacionar_esquerda(self):
+        pass
+    def rotacionar_direita(self):
+        pass
+    
     def ir_baixo(self):
         pass
     

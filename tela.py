@@ -4,8 +4,6 @@ from blocoi import BlocoI
 
 
 class Tela:
-
-
     def __init__(self,quantidadeL,quantidadeC):
         self.__quantidadeL = quantidadeL
         #aqui eu crio uma matrix quantidadeL x quantidadeC, com uma duas linhas e duas colunas a mais para servir de paredes 
@@ -53,10 +51,53 @@ class Tela:
         self.bloco_atual.gerarBloco()
 
 
+    def taganhadofilho(self):
+        
+        """checka se alguma linha da matrix esta completa se estiver removemos as pecas dela
+            return : boolean(removeu a linha)
+        """
+        contador = 0 #ira contar quantas colunas em uma linha estao preenchidas
+        linhaRemover = -1 #referencia a linha que ira ser removida
+
+        for l in range(1,self.__quantidadeL+1):
+            contador = 0
+            
+            for c in range(1,self.__quantidadeC+1):
+                if self.__matrixT[l][c]!=" ":
+                    contador+=1
+            
+            if(contador==self.__quantidadeC):
+                linhaRemover = l
+        
+        if(linhaRemover!=-1):
+            for c in range(1,self.__quantidadeC+1):
+                self.__matrixT[linhaRemover][c] = " "
+            return True
+        return False
+
+
+
+
+
     def mover_esquerda(self):
         """move bloco atual para a esquerda da tela"""
         self.bloco_atual.ir_esquerda()
 
+    def mover_direta(self):
+        """move bloco atual para a direita da tela"""
+        self.bloco_atual.ir_direita()
+    
+    def mover_baixo(self):
+        """move bloco atual para baixo da tela"""
+        self.bloco_atual.ir_baixo()    
+
+    def rotacionar_esquerda(self):
+        """rotaciona o bloco atual para a esquerda"""
+        self.bloco_atual.rotacionar_esquerda()
+
+    def rotaionar_direita(self):
+        """rotaciona bloco para a direita"""
+        self.bloco_atual.rotacionar_direita()    
     
     def mostrar_pontuacao(self,pontuacao):
         print("Pontuação:  "+ str(pontuacao))
