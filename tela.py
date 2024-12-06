@@ -1,14 +1,20 @@
 import os
-from bloco import Bloco
+
+from blocoi import BlocoI
 
 
 class Tela:
+
+
     def __init__(self,quantidadeL,quantidadeC):
         self.__quantidadeL = quantidadeL
         #aqui eu crio uma matrix quantidadeL x quantidadeC, com uma duas linhas e duas colunas a mais para servir de paredes 
         self.__quantidadeC = quantidadeC
         self.__matrixT = [[" " for c in range(quantidadeC+2) ] for l in range(quantidadeL+2)]
         
+        self.bloco_atual = None #bloco que esta em execucao na tela
+
+
         for i in range(1,quantidadeC+1):
             #preencho a primeira linha e a ultima com paredes
             self.__matrixT[0][i]=self.__matrixT[self.__quantidadeL+1][i] ="_" 
@@ -37,15 +43,21 @@ class Tela:
 
     def adicionar_bloco(self):
         """essa função a adiciona uma bloco na matrix"""
+        
         #nosssas linha do jogo comeca no indice 1
-        bloco = Bloco([1,2,3,4,5,6,7])
+        
+        self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
+    
         self.__limparTela()
-        bloco.gerarBloco(self.__matrixT)
+
+        self.bloco_atual.gerarBloco()
 
 
     def mover_esquerda(self):
-        #move bloco para esquerda
-        print("to mendove")
+        """move bloco atual para a esquerda da tela"""
+        self.bloco_atual.ir_esquerda()
+
+    
     def mostrar_pontuacao(self,pontuacao):
         print("Pontuação:  "+ str(pontuacao))
 

@@ -1,20 +1,24 @@
 class Bloco:
-    def __init__(self,cordenas):
-        self.__cordenadas = cordenas
+    def __init__(self,matriz_referencia):
+        self.matriz_referencia = matriz_referencia
+        self.cordenadas = []
     
-    def gerarBloco(self,matriT):
+    def gerarBloco(self):
         """
         essa função gera um bloco na parte inicial da tela
         """
+        pass
 
-        ##metade da linha
-        midLinha = int ((len(matriT[0])-1)/2)
-        print(midLinha)
-        #nosssas linha do jogo comeca no indice 1
-        matriT[1][midLinha] = "*"
-        matriT[2][midLinha] = "*"
-        matriT[3][midLinha] = "*"
-        matriT[4][midLinha] = "*"
+   
+
+
+    def ir_baixo(self):
+        pass
+    
+    def ir_esquerda(self):
+        pass
+    def ir_direita(self):
+        pass
 
 
 

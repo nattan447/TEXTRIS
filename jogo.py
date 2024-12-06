@@ -25,7 +25,7 @@ class Jogo:
         elif resposta=="p":
             self.__showtop10players()
         elif resposta=="s":
-            self.__sairjogo
+            return
         else:
             print("operação invalida")
 
@@ -43,8 +43,8 @@ class Jogo:
 
         self.partidas.append(partida) #dps que a partida acabar colocamos no array de partidas para uso futuro
         
-        if len(self.partidas)>0:
-            self.partidas.sort(key=partida.pontuacao,reverse=True) #ordeno as lista de partidas em ordem descrescente por pontuacao
+        # if len(self.partidas)>0:
+        #     self.partidas.sort(key=partida.pontuacao,reverse=True) #ordeno as lista de partidas em ordem descrescente por pontuacao
     
     
     def  __caregarPartida(self):
@@ -59,5 +59,3 @@ class Jogo:
         
     
     
-    def __sairjogo(self):
-        print("saindo do jogo")
