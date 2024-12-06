@@ -3,6 +3,10 @@ class Bloco:
         self.__cordenadas = cordenas
     
     def gerarBloco(self,matriT):
+        """
+        essa função gera um bloco na parte inicial da tela
+        """
+
         ##metade da linha
         midLinha = int ((len(matriT[0])-1)/2)
         print(midLinha)

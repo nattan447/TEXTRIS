@@ -1,4 +1,6 @@
 from readchar import readkey, key
+from jogo import Jogo
+
 from tela import Tela
 
 # Iblock = [["*"],
@@ -7,14 +9,17 @@ from tela import Tela
 #           ["*"],]
 
 
-# tela = Tela(8,12)
+# jogo = Jogo()
 
-# tela.mostrar_tela()
+# jogo.iniciar_game()
 
-# tela.adicionar_bloco()
 
-# tela.mostrar_tela()
+tela = Tela(8,4)
 
+tela.mostrar_tela()
+
+tela.adicionar_bloco()
+tela.mostrar_tela()
 
 
 
@@ -31,5 +36,3 @@ from tela import Tela
 #         print("Pressionou ENTER")
 #         print("Tchau!")
 #         break
-
-
