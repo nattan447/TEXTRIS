@@ -50,6 +50,7 @@ class Jogo:
         quantidadeC = input("digite o número de colunas da tela do jogo : ")
         partida.iniciar_partida(int(quantidadeL),int(quantidadeC))
         print("cabou a graça")
+        
         self.partidas.append(partida) #dps que a partida acabar colocamos no array de partidas para uso futuro
         
         # if len(self.partidas)>0:

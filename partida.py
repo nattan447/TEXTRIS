@@ -1,4 +1,5 @@
-
+from datetime import datetime
+import pickle
 from readchar import readkey, key
 from  tela import Tela
 
@@ -48,8 +49,20 @@ class Partida :
             elif(tecla=="s"):
                 ##sai da partida
                 return
+            elif(tecla=="g"): 
+                ##salva e sai da partida    
+                self.__salvar_partida()
+                return
             tela.mostrar_tela()
 
+    def __salvar_partida(self):
+              """
+              salva o objeto da partida atual em um arquivo com nome sendo : nome_jogador+dataAtual
+              """
+              data = datetime.now()
+              nomeArquivo = self.nome_jogador+str(data.strftime('%d-%m-%Y-%H:%M:%S'))
+              with open(nomeArquivo, "wb") as arquivo:
+                    pickle.dump(self, arquivo) 
 
 
 
