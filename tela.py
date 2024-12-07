@@ -23,13 +23,13 @@ class Tela:
 
     
     @staticmethod
-    def __limparTela():
+    def limparTela():
         os.system('cls||clear')    
     
     def mostrar_tela(self):
         """ essa função mostra a matriz da tela"""
 
-        self.__limparTela()
+        self.limparTela()
 
 
         for l in self.__matrixT:
@@ -46,7 +46,7 @@ class Tela:
         
         self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
     
-        self.__limparTela()
+        self.limparTela()
 
         self.bloco_atual.gerarBloco()
 
@@ -68,10 +68,20 @@ class Tela:
             
             if(contador==self.__quantidadeC):
                 linhaRemover = l
-        
-        if(linhaRemover!=-1):
+
+
+            #primeira linha completa -> apenas esvazie ela
+        if(linhaRemover==0):
             for c in range(1,self.__quantidadeC+1):
                 self.__matrixT[linhaRemover][c] = " "
+            
+            return True
+        elif(linhaRemover>1):
+            #linha maior q 1 preenchida - > coloque o que esta em cima para baixo
+            linhadesce = linhaRemover -1
+        
+            for c in range(1,self.__quantidadeC+1):
+                self.__matrixT[linhaRemover][c] = self.__matrixT[linhadesce][c]
             return True
         return False
 

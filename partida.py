@@ -33,8 +33,11 @@ class Partida :
 
 
         while True:
-        
-            self.__mostrar_infos()  
+            
+            self.__mostrar_infos()
+
+            print(" ")
+
             tecla = readkey()
             if(tecla==key.LEFT):
                 tela.mover_esquerda()
@@ -42,7 +45,10 @@ class Partida :
                 tela.mover_direta()
             elif (tecla==key.DOWN):
                 tela.mover_baixo()
-      
+            elif(tecla=="s"):
+                ##sai da partida
+                return
+            tela.mostrar_tela()
 
 
 
