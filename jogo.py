@@ -1,6 +1,9 @@
 from partida import Partida
 from tela import Tela
 from readchar import readkey, key
+import os
+import shutil
+
 class Jogo:
     
     
@@ -32,13 +35,13 @@ class Jogo:
             elif resposta=="p":
                 self.__showtop10players()
             elif resposta=="s":
+                shutil.rmtree("partidas",ignore_errors=True) #remove a pasta partidas
                 return
             else:
                 print("operação invalida")
             Tela.limparTela()
 
 
-    
     
     def __iniciarPartida(self):
         """
@@ -58,7 +61,32 @@ class Jogo:
     
     
     def  __caregarPartida(self):
-        print("carrehar partida")
+        """
+        essa funcao carrega uma partida salva previamente
+        """
+
+
+        Tela.limparTela()
+
+        if not os.path.exists("partidas"):
+            return
+
+
+        contador = 1
+        print("escolha o número da partida a ser carregada ou presione esc para voltar")
+
+        for arquivo in  os.listdir("partidas"):
+            print(str(contador)+" - "+str(arquivo))
+            contador+=1
+            
+        while True:
+            tecla = readkey()
+            if(tecla==key.ESC):
+                return
+
+
+
+        
     
     def __showtop10players(self):
         """
