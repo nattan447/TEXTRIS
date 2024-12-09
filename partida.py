@@ -5,11 +5,14 @@ from  tela import Tela
 import  os
 
 class Partida :
-    def __init__(self,nome_jogador):
+    def __init__(self,nome_jogador,pontuacao):
         self.nome_jogador = nome_jogador
-        self.pontuacao = 0
-    
+        self.pontuacao = pontuacao
+        self.__telaPartida = None
 
+    def mostrarT(self):
+        #funcao temporaria para testes da partida gravada
+        self.__telaPartida.mostrar_tela()
 
     def __mostrar_infos(self):
         """mostra as keys disponiveis para o jogador e seua pontuacao"""
@@ -27,11 +30,11 @@ class Partida :
             quantidadeC : quantidade colunas da tela
         """
 
-        tela = Tela(quantidadeL,quantidadeC)
+        self.__telaPartida = Tela(quantidadeL,quantidadeC)
         
-        tela.adicionar_bloco()
+        self.__telaPartida.adicionar_bloco()
         
-        tela.mostrar_tela()
+        self.__telaPartida.mostrar_tela()
 
 
         while True:
@@ -42,11 +45,11 @@ class Partida :
 
             tecla = readkey()
             if(tecla==key.LEFT):
-                tela.mover_esquerda()
+                self.__telaPartida.mover_esquerda()
             elif (tecla==key.RIGHT):
-                tela.mover_direta()
+                self.__telaPartida.mover_direta()
             elif (tecla==key.DOWN):
-                tela.mover_baixo()
+                self.__telaPartida.mover_baixo()
             elif(tecla=="s"):
                 ##sai da partida
                 return
@@ -54,7 +57,7 @@ class Partida :
                 ##salva e sai da partida    
                 self.__salvar_partida()
                 return
-            tela.mostrar_tela()
+            self.__telaPartida.mostrar_tela()
 
     def __salvar_partida(self):
               """

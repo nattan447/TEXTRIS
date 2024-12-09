@@ -1,3 +1,4 @@
+import pickle
 from partida import Partida
 from tela import Tela
 from readchar import readkey, key
@@ -48,7 +49,7 @@ class Jogo:
         essa função inicia uma partida
         """
         nome = input("Digite o nome do jogador : ")
-        partida = Partida(nome)
+        partida = Partida(nome,0)
         quantidadeL = input("digite o numero de linhas da tela do jogo : ")
         quantidadeC = input("digite o número de colunas da tela do jogo : ")
         partida.iniciar_partida(int(quantidadeL),int(quantidadeC))
@@ -64,27 +65,40 @@ class Jogo:
         """
         essa funcao carrega uma partida salva previamente
         """
-
-
         Tela.limparTela()
 
         if not os.path.exists("partidas"):
             return
+    
+        #abre a pasta partidas
+        pastaPartidas = os.listdir("partidas")
 
-
-        contador = 1
-        print("escolha o número da partida a ser carregada ou presione esc para voltar")
-
-        for arquivo in  os.listdir("partidas"):
-            print(str(contador)+" - "+str(arquivo))
-            contador+=1
-            
+        for i  in  range(len(pastaPartidas)):
+            print(str(i)+" - "+pastaPartidas[i])
+        
+        print("escolha o número da partida a ser carregada ou presione s para voltar :")
         while True:
             tecla = readkey()
-            if(tecla==key.ESC):
+            if tecla=="s":
+                return
+            try:
+                #checka se o arquivo da partida escolhido realmente existe nas pastas
+                if 0<=int(tecla)<len(pastaPartidas):
+                    # abre o arquivo e carrega como objeto
+                    caminho = os.path.join("partidas",pastaPartidas[int(tecla)])
+                    with open(caminho, "rb") as arquivo:
+                        partida_carregada = pickle.load(arquivo)
+                        partida_carregada.mostrarT()
+                        
+                        while(True):
+                            i = 0
+                else :return
+            except:
+                #operacao invalida
                 return
 
 
+    
 
         
     
