@@ -30,13 +30,16 @@ class BlocoI(Bloco):
         self.coordenadas.append(midLinha+3)
       
     def rotacionar_esquerda(self):
+        print("rotacionando para esquerda")
         pass
 
 
     def rotacionar_direita(self):
+        print("irotacionando para diereita")
         pass
     
     def ir_baixo(self):
+
 
         if(self.coordenadas[0] + 1 == self.coordenadas[2] and self.coordenadas[6] + 1 != " "):   #se ele está em pé e a linha de baixo da última linha do bloco não 
             return False                                                                         #está vazia, não dá pra mexer
@@ -65,8 +68,10 @@ class BlocoI(Bloco):
         return True 
 
     def ir_esquerda(self):
+        print("Indo para a esquerda")
         pass
     def ir_direita(self):
+        print("Indo para a direita")
         pass
 
 
