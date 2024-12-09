@@ -7,7 +7,6 @@ import shutil
 
 class Jogo:
     
-    
     def iniciar_game(self):
         
         self.partidas = []
@@ -18,8 +17,6 @@ class Jogo:
         """
 
         while True:
-
-
             print("*** Jogo Textris - um tetris em modo texto ***")
             print("Opções  do jogo jogo:")
             print("- <i> para iniciar uma nova partida")
@@ -32,7 +29,7 @@ class Jogo:
             if resposta=="i":
                 self.__iniciarPartida()
             elif resposta =="c":
-                self.__caregarPartida()
+                self.__carregarPartida()
             elif resposta=="p":
                 self.__showtop10players()
             elif resposta=="s":
@@ -42,8 +39,6 @@ class Jogo:
                 print("operação invalida")
             Tela.limparTela()
 
-
-    
     def __iniciarPartida(self):
         """
         essa função inicia uma partida
@@ -54,14 +49,13 @@ class Jogo:
         quantidadeC = input("digite o número de colunas da tela do jogo : ")
         partida.iniciar_partida(int(quantidadeL),int(quantidadeC))
         print("cabou a graça")
-        
+    
         self.partidas.append(partida) #dps que a partida acabar colocamos no array de partidas para uso futuro
-        
-        # if len(self.partidas)>0:
-        #     self.partidas.sort(key=partida.pontuacao,reverse=True) #ordeno as lista de partidas em ordem descrescente por pontuacao
+        if len(self.partidas)>1:
+            self.partidas.sort(key=lambda partida:partida.pontuacao,reverse=True) #ordeno as lista de partidas em ordem descrescente por pontuacao
     
     
-    def  __caregarPartida(self):
+    def  __carregarPartida(self):
         """
         essa funcao carrega uma partida salva previamente
         """
@@ -86,21 +80,19 @@ class Jogo:
                 if 0<=int(tecla)<len(pastaPartidas):
                     # abre o arquivo e carrega como objeto
                     caminho = os.path.join("partidas",pastaPartidas[int(tecla)])
+                    
                     with open(caminho, "rb") as arquivo:
-                        partida_carregada = pickle.load(arquivo)
-                        partida_carregada.mostrarT()
                         
-                        while(True):
-                            i = 0
+                        partida_carregada = pickle.load(arquivo)
+                        
+                        partida_carregada.init_part_carregada()
+                        #saiu da partida
+                        return
+                
                 else :return
             except:
                 #operacao invalida
                 return
-
-
-    
-
-        
     
     def __showtop10players(self):
         """
@@ -108,14 +100,13 @@ class Jogo:
         """
         Tela.limparTela()
         for i in range(len(self.partidas)):
-            print("jogadaor : " + self.partidas[i].nome_jogador)
-            
-            if(i==9): break
-
+            print(str(i+1)+" - " + self.partidas[i].nome_jogador + " - " + str(self.partidas[i].pontuacao)+"pts")        
+            if i==9: break
+        
+        print("aperte s para sair")
         while True:
-            print("aperte s para sair")
             tecla = readkey()
-            if(tecla == "s"):return
+            if tecla == "s":return
                     
                 
     
