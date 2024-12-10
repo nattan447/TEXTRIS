@@ -37,10 +37,12 @@ class BlocoI(Bloco):
         self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7]] = " "
       
     def rotacionar_esquerda(self):
+        print("rotacionando para esquerda")
         pass
 
 
     def rotacionar_direita(self):
+        print("irotacionando para diereita")
         pass
     
     def ir_baixo(self):
@@ -49,7 +51,8 @@ class BlocoI(Bloco):
             self.coordenadas = [0, 0, 0, 0, 0, 0, 0, 0]                                          #se ele está em pé e a linha de baixo da última linha do bloco não
             return False                                                                         #está vazia, então não podemos mexer                   
         
-        elif(self.coordenadas[0] == self.coordenadas[2] and (self.matriz_referencia[self.coordenadas[0] + 1][self.coordenadas[1]] != " " or  
+        elif(self.coordenadas[0] == self.coordenadas[2] and (self.matriz_referencia[self.coordenadas[0] + 1][self.coordenadas[1]] != " " or   
+
         self.matriz_referencia[self.coordenadas[2] + 1][self.coordenadas[3]] != " " or           #se o bloco está deitado e, pelo menos uma posição abaixo de qualquer                
         self.matriz_referencia[self.coordenadas[4] + 1][self.coordenadas[5]] != " " or           #elemento da linha não está vazio, então não dá para mexer
         self.matriz_referencia[self.coordenadas[6] + 1][self.coordenadas[7]] != " ")):
@@ -100,6 +103,7 @@ class BlocoI(Bloco):
             self.coordenadas[i] = self.coordenadas[i] + 1           
             i = i + 2  
         self.gerarBloco()
+
 
 
 
