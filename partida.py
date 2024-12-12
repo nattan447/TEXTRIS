@@ -41,12 +41,20 @@ class Partida :
             elif (tecla==key.RIGHT):
                 self.__telaPartida.mover_direta()
             elif (tecla==key.DOWN):
-                self.__telaPartida.mover_baixo() 
-                self.pontuacao+=2 #toda hr q o cara conseguir mover para baixo aumenta a pontu
+                result = self.__telaPartida.mover_baixo() 
+                if result== -2 :
+                     return #perdeu
+                if result>=1 :
+                     self.pontuacao+= result*100
+                else:
+                    self.pontuacao+= 2#toda hr q o cara conseguir mover para baixo aumenta a pontu
+                     
             elif tecla==key.PAGE_UP:
                  self.__telaPartida.rotacionar_direita()
             elif tecla==key.PAGE_DOWN:
+            
                  self.__telaPartida.rotacionar_esquerda()
+            
             elif(tecla=="s"):
                 ##sai da partida
                 return

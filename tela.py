@@ -1,7 +1,9 @@
 import os
 from blocoi import BlocoI
-
-
+from blocoj import BlocoJ
+from blocol import BlocoL
+from blocoo import BlocoO
+import random
 class Tela:
     def __init__(self,quantidadeL,quantidadeC):
         self.__quantidadeL = quantidadeL
@@ -42,8 +44,17 @@ class Tela:
         """essa função a adiciona uma bloco na matrix"""
         
         #nosssas linha do jogo comeca no indice 1
+        chance = random.uniform(0.01,1.0)
+        #bloco aleatorio
+        if chance<=0.25:
+            self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
+        elif 0.25<chance<=0.5:
+            self.bloco_atual = BlocoJ(self.__matrixT) #crio o bloco de formato J
+        elif 0.5<chance<=0.75:
+            self.bloco_atual = BlocoL(self.__matrixT) #crio o bloco de formato L
+        elif 0.75<chance:
+            self.bloco_atual = BlocoO(self.__matrixT) #crio o bloco de formato L
 
-        self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
     
         self.limparTela()
 
@@ -67,9 +78,10 @@ class Tela:
             
             if(contador==self.__quantidadeC):
                 linhaRemover = l
+                break
 
             #primeira linha completa -> apenas esvazie ela
-        if(linhaRemover==0):
+        if(linhaRemover==1):
             for c in range(1,self.__quantidadeC+1):
                 self.__matrixT[linhaRemover][c] = " "            
             return True
@@ -84,12 +96,7 @@ class Tela:
                     self.__matrixT[l][c] = j
                     j = bau
 
-
-
-
-
-            for c in range(1,self.__quantidadeC+1):
-                self.__matrixT[linhaRemover][c] = self.__matrixT[linhadesce][c]
+    
             return True
         return False
 
@@ -102,10 +109,25 @@ class Tela:
         self.bloco_atual.ir_direita()
     
     def mover_baixo(self):
-        """move bloco atual para baixo da tela retorna verdadeiro se consguiu mover para baixo"""
+        """move bloco atual para baixo da tela retorna verdadeiro se consguiu mover para baixo
+        
+            return : -2 se o jogador perdeu , >=1 se o jogador apagou linhas , -1 se nao tem como ir para baixo
+        """
         moveu = self.bloco_atual.ir_baixo()
         if moveu==False:
+            midLinha = int ((len(self.__matrixT[0])-1)/2)
+            if self.__matrixT[1][midLinha]!=" ":
+                return -2#verifica se o user perdeu a partida
+            quntLinhas = 0
+            for i in range(0,len(self.__matrixT)-2):
+                w = self.__taganhanDoFilho()
+                if w ==True:
+                    quntLinhas+=1
             self.adicionar_bloco()
+            if quntLinhas>0:
+                return quntLinhas
+        return -1
+            
 
     def rotacionar_esquerda(self):
         """rotaciona o bloco atual para a esquerda"""
