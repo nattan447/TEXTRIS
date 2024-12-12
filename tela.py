@@ -1,5 +1,5 @@
 import os
-from bloco import BlocoI
+from blocoi import BlocoI
 
 
 class Tela:
@@ -103,13 +103,15 @@ class Tela:
     
     def mover_baixo(self):
         """move bloco atual para baixo da tela retorna verdadeiro se consguiu mover para baixo"""
-        self.bloco_atual.ir_baixo()    
+        moveu = self.bloco_atual.ir_baixo()
+        if moveu==False:
+            self.adicionar_bloco()
 
     def rotacionar_esquerda(self):
         """rotaciona o bloco atual para a esquerda"""
         self.bloco_atual.rotacionar_esquerda()
 
-    def rotaionar_direita(self):
+    def rotacionar_direita(self):
         """rotaciona bloco para a direita"""
         self.bloco_atual.rotacionar_direita()    
     
