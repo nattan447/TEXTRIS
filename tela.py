@@ -109,7 +109,7 @@ class Tela:
         """rotaciona o bloco atual para a esquerda"""
         self.bloco_atual.rotacionar_esquerda()
 
-    def rotaionar_direita(self):
+    def rotacionar_direita(self):
         """rotaciona bloco para a direita"""
         self.bloco_atual.rotacionar_direita()    
     
