@@ -1,9 +1,5 @@
 import os
-
-from blocoj import *
-from blocoi import *
-from blocol import *
-from blocoo import *
+from blocoi import BlocoI
 
 
 class Tela:
@@ -24,15 +20,15 @@ class Tela:
             #preencho a primeira coluna e a ultima com paredes
             self.__matrixT[i][0] = self.__matrixT[i][self.__quantidadeC+1] = "|"
 
-    
+
     @staticmethod
-    def __limparTela():
+    def limparTela():
         os.system('cls||clear')    
     
     def mostrar_tela(self):
         """ essa função mostra a matriz da tela"""
 
-        self.__limparTela()
+        self.limparTela()
 
 
         for l in self.__matrixT:
@@ -46,15 +42,15 @@ class Tela:
         """essa função a adiciona uma bloco na matrix"""
         
         #nosssas linha do jogo comeca no indice 1
-        
-        self.bloco_atual = BlocoO(self.__matrixT) #crio o bloco de formato I
+
+        self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
     
-        self.__limparTela()
+        self.limparTela()
 
         self.bloco_atual.gerarBloco()
 
 
-    def taganhadofilho(self):
+    def __taganhanDoFilho(self):
         
         """checka se alguma linha da matrix esta completa se estiver removemos as pecas dela
             return : boolean(removeu a linha)
@@ -71,16 +67,31 @@ class Tela:
             
             if(contador==self.__quantidadeC):
                 linhaRemover = l
-        
-        if(linhaRemover!=-1):
+
+            #primeira linha completa -> apenas esvazie ela
+        if(linhaRemover==0):
             for c in range(1,self.__quantidadeC+1):
-                self.__matrixT[linhaRemover][c] = " "
+                self.__matrixT[linhaRemover][c] = " "            
+            return True
+        elif(linhaRemover>1):
+            #linha maior q 1 preenchida - > coloque o que esta em cima para baixo
+            linhadesce = linhaRemover -1
+
+            for c in range(1,self.__quantidadeC+1):
+                j = " "
+                for l in range(1,linhaRemover+1):
+                    bau = self.__matrixT[l][c]
+                    self.__matrixT[l][c] = j
+                    j = bau
+
+
+
+
+
+            for c in range(1,self.__quantidadeC+1):
+                self.__matrixT[linhaRemover][c] = self.__matrixT[linhadesce][c]
             return True
         return False
-
-
-
-
 
     def mover_esquerda(self):
         """move bloco atual para a esquerda da tela"""
@@ -91,7 +102,7 @@ class Tela:
         self.bloco_atual.ir_direita()
     
     def mover_baixo(self):
-        """move bloco atual para baixo da tela"""
+        """move bloco atual para baixo da tela retorna verdadeiro se consguiu mover para baixo"""
         self.bloco_atual.ir_baixo()    
 
     def rotacionar_esquerda(self):
