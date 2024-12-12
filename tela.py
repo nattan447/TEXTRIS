@@ -1,5 +1,5 @@
 import os
-from blocoi import BlocoI
+from bloco import BlocoI
 
 
 class Tela:

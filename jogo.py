@@ -4,11 +4,11 @@ from tela import Tela
 from readchar import readkey, key
 import os
 import shutil
+        
 
 class Jogo:
     
     def iniciar_game(self):
-        
         self.partidas = []
         
         """
