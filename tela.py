@@ -1,6 +1,9 @@
 import os
 
-from bloco import *
+from blocoj import *
+from blocoi import *
+from blocol import *
+from blocoo import *
 
 
 class Tela:
@@ -44,7 +47,7 @@ class Tela:
         
         #nosssas linha do jogo comeca no indice 1
         
-        self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
+        self.bloco_atual = BlocoO(self.__matrixT) #crio o bloco de formato I
     
         self.__limparTela()
 
