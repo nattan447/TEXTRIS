@@ -38,11 +38,13 @@ class BlocoI(Bloco):
         if(self.coordenadas[1] + 1 == self.coordenadas[3]):     #Caso em que a peça está deitada para a direita
             if(self.coordenadas[2] - 1 <= 0 or self.coordenadas[4] - 2 <= 0 or self.coordenadas[6] - 3 <= 0):       #Verifico se, após girar, a peça não sairá da tela
                 return False
-            else:                                           #Atualizo as coordenadas e gero um novo bloco
-                self.apagaBloco()
+            elif(self.matriz_referencia[self.coordenadas[2] - 1][self.coordenadas[3] - 1] != " " or self.matriz_referencia[self.coordenadas[4] - 2][self.coordenadas[5] - 2] != " " or self.matriz_referencia[self.coordenadas[6] - 3][self.coordenadas[7] - 3] != " "):
+                return False                                    #Verifico se está livre o espaço para a peça
+            else:                                           
+                self.apagaBloco()                           
                 i = 1
                 j = 2
-                while(i < 4):
+                while(i < 4):                                               #Atualizo as coordenadas e gero um novo bloco
                     self.coordenadas[j] = self.coordenadas[j] - i
                     self.coordenadas[j + 1] = self.coordenadas[j + 1] - i
                     j = j + 2
@@ -51,13 +53,15 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[0] - 1 == self.coordenadas[2]):   #Caso em que a peça está em pé
-            if(self.coordenadas[1] - 1 <= 0 or self.coordenadas[3] - 2 <= 0 or self.coordenadas[5] - 3 <= 0):       #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[3] - 1 <= 0 or self.coordenadas[5] - 2 <= 0 or self.coordenadas[7] - 3 <= 0):       #Verifico se, após girar, a peça não sairá da tela
                 return False
-            else:                                           #Atualizo as coordenadas e gero um novo bloco
+            elif(self.matriz_referencia[self.coordenadas[2] + 1][self.coordenadas[3] - 1] != " " or self.matriz_referencia[self.coordenadas[4] + 2][self.coordenadas[5] - 2] != " " or self.matriz_referencia[self.coordenadas[6] + 3][self.coordenadas[7] - 3] != " "):
+                return False                                                #Verifico se está livre o espaço para a peça
+            else:                                           
                 self.apagaBloco()
                 i = 1
                 j = 2
-                while(i < 4):
+                while(i < 4):                                               #Atualizo as coordenadas e gero um novo bloco
                     self.coordenadas[j] = self.coordenadas[j] + i
                     self.coordenadas[j + 1] = self.coordenadas[j + 1] - i
                     i = i + 1
@@ -66,13 +70,15 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[1] - 1 == self.coordenadas[3]):  #Caso em que a peça está deitada para a esquerda
-            if(self.coordenadas[2] + 1 >= len(self.matriz_referencia) or self.coordenadas[4] + 2 >= len(self.matriz_referencia) or self.coordenadas[6] + 3 >= len(self.matriz_referencia)): #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[2] + 1 >= len(self.matriz_referencia) - 1 or self.coordenadas[4] + 2 >= len(self.matriz_referencia) - 1 or self.coordenadas[6] + 3 >= len(self.matriz_referencia) - 1): #Verifico se, após girar, a peça não sairá da tela
                 return False
-            else:                                           #Atualizo as coordenadas e gero um novo bloco
+            elif(self.matriz_referencia[self.coordenadas[2] + 1][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4] + 2][self.coordenadas[5] + 2] != " " or self.matriz_referencia[self.coordenadas[6] + 3][self.coordenadas[7] + 3] != " "):
+                return False                                                #Verifico se está livre o espaço para a peça
+            else:                                           
                 self.apagaBloco()
                 i = 1
                 j = 2
-                while(i < 4):
+                while(i < 4):                                               #Atualizo as coordenadas e gero um novo bloco
                     self.coordenadas[j] = self.coordenadas[j] + i
                     self.coordenadas[j + 1] = self.coordenadas[j + 1] + i
                     j = j + 2
@@ -81,13 +87,15 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[0] + 1 == self.coordenadas[2]):   #Caso em que a peça está de cabeça para baixo
-            if(self.coordenadas[1] + 1 >= len(self.matriz_referencia[0]) or self.coordenadas[3] + 2 >= len(self.matriz_referencia[0]) or self.coordenadas[5] + 3 >= len(self.matriz_referencia[0])): #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[3] + 1 >= len(self.matriz_referencia[0] - 1) or self.coordenadas[5] + 2 >= len(self.matriz_referencia[0] - 1) or self.coordenadas[7] + 3 >= len(self.matriz_referencia[0]) - 1): #Verifico se, após girar, a peça não sairá da tela
                 return False
+            elif(self.matriz_referencia[self.coordenadas[2] - 1][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4] - 2][self.coordenadas[5] + 2] != " " or self.matriz_referencia[self.coordenadas[6] - 3][self.coordenadas[7] + 3] != " "):
+                return False                                                #Verifico se está livre o espaço para a peça
             else:
                 self.apagaBloco()
                 i = 1
                 j = 2
-                while(i < 4):
+                while(i < 4):                                               #Atualizo as coordenadas e gero um novo bloco
                     self.coordenadas[j] = self.coordenadas[j] - i
                     self.coordenadas[j + 1] = self.coordenadas[j + 1] + i
                     i = i + 1
@@ -97,7 +105,9 @@ class BlocoI(Bloco):
 
     def rotacionar_direita(self):
         if(self.coordenadas[1] + 1 == self.coordenadas[3]):     #Caso em que a peça está deitada para a direita
-            if(self.coordenadas[2] + 1 >= len(self.matriz_referencia) or self.coordenadas[4] + 2 >= len(self.matriz_referencia) or self.coordenadas[6] + 3 >= len(self.matriz_referencia)):       #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[2] + 1 >= len(self.matriz_referencia) - 1 or self.coordenadas[4] + 2 >= len(self.matriz_referencia) - 1 or self.coordenadas[6] + 3 >= len(self.matriz_referencia) - 1):       #Verifico se, após girar, a peça não sairá da tela
+                return False
+            elif(self.matriz_referencia[self.coordenadas[2] + 1][self.coordenadas[3] - 1] != " " or self.matriz_referencia[self.coordenadas[4] + 2][self.coordenadas[5] - 2] != " " or self.matriz_referencia[self.coordenadas[6] + 3][self.coordenadas[7] - 3] != " "):
                 return False
             else:                                           #Atualizo as coordenadas e gero um novo bloco
                 self.apagaBloco()
@@ -112,7 +122,9 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[0] - 1 == self.coordenadas[2]):   #Caso em que a peça está em pé
-            if(self.coordenadas[1] + 1 >= len(self.matriz_referencia[0]) or self.coordenadas[3] + 2 >= len(self.matriz_referencia[0]) or self.coordenadas[5] + 3 >= len(self.matriz_referencia[0])):       #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[3] + 1 >= len(self.matriz_referencia[0]) - 1 or self.coordenadas[5] + 2 >= len(self.matriz_referencia[0]) - 1 or self.coordenadas[7] + 3 >= len(self.matriz_referencia[0]) - 1):       #Verifico se, após girar, a peça não sairá da tela
+                return False
+            elif(self.matriz_referencia[self.coordenadas[2] + 1][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4] + 2][self.coordenadas[5] + 2] != " " or self.matriz_referencia[self.coordenadas[6] + 3][self.coordenadas[7] + 3] != " "):
                 return False
             else:                                           #Atualizo as coordenadas e gero um novo bloco
                 self.apagaBloco()
@@ -129,6 +141,8 @@ class BlocoI(Bloco):
         elif(self.coordenadas[1] - 1 == self.coordenadas[3]):  #Caso em que a peça está deitada para a esquerda
             if(self.coordenadas[2] - 1 <= 0 or self.coordenadas[4] - 2 <= 0 or self.coordenadas[6] - 3 <= 0): #Verifico se, após girar, a peça não sairá da tela
                 return False
+            elif(self.matriz_referencia[self.coordenadas[2] - 1][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4] - 2][self.coordenadas[5] + 2] != " " or self.matriz_referencia[self.coordenadas[6] - 3][self.coordenadas[7] + 3] != " "):
+                return False
             else:                                           #Atualizo as coordenadas e gero um novo bloco
                 self.apagaBloco()
                 i = 1
@@ -142,7 +156,9 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[0] + 1 == self.coordenadas[2]):   #Caso em que a peça está de cabeça para baixo
-            if(self.coordenadas[1] - 1 <= 0 or self.coordenadas[3] - 2 <= 0 or self.coordenadas[5] - 3 <= 0): #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[3] - 1 <= 0 or self.coordenadas[5] - 2 <= 0 or self.coordenadas[7] - 3 <= 0): #Verifico se, após girar, a peça não sairá da tela
+                return False
+            elif(self.matriz_referencia[self.coordenadas[2] - 1][self.coordenadas[3] - 1] != " " or self.matriz_referencia[self.coordenadas[4] - 2][self.coordenadas[5] - 2] != " " or self.matriz_referencia[self.coordenadas[6] - 3][self.coordenadas[7] - 3] != " "):
                 return False
             else:
                 self.apagaBloco()
@@ -159,10 +175,16 @@ class BlocoI(Bloco):
     
     def ir_baixo(self):
 
-        if(not(self.coordenadas[0] == self.coordenadas[2])):
+        if(self.coordenadas[0] + 1 == self.coordenadas[2]):
             if(self.matriz_referencia[self.coordenadas[6] + 1][self.coordenadas[7]] != " "):   
-                self.coordenadas = [0, 0, 0, 0, 0, 0, 0, 0]                                          #se ele está em pé e a linha de baixo da última linha do bloco não
-                return False                                                                         #está vazia, então não podemos mexer                   
+                self.coordenadas = [0, 0, 0, 0, 0, 0, 0, 0]                                          #se ele está de ponta cabeça e a linha de baixo da última linha do
+                return False                                                                         #bloco não está vazia, então não podemos mexer  
+
+        elif(self.coordenadas[0] - 1 == self.coordenadas[2]):
+            if(self.matriz_referencia[self.coordenadas[0] + 1][self.coordenadas[1]] != " "):   
+                self.coordenadas = [0, 0, 0, 0, 0, 0, 0, 0]                                          #se ele está em pé e a linha de baixo da última linha do
+                return False                                                                         #bloco não está vazia, então não podemos mexer  
+                 
         
         elif(self.coordenadas[0] == self.coordenadas[2]):
             if((self.matriz_referencia[self.coordenadas[0] + 1][self.coordenadas[1]] != " " or  
@@ -189,9 +211,15 @@ class BlocoI(Bloco):
             self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] - 1] != " ")):
                 return False
 
-        elif(self.coordenadas[0] == self.coordenadas[2]):
-            if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1] - 1] != " "):       #se está deitado e a posição ao lado do elemento mais à esquerda não                                  
-                return False                                                                       #está vazia, então não dá para mexer                                                                                              
+        elif(self.coordenadas[1] + 1 == self.coordenadas[3]):
+            if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1] - 1] != " "):       #se está deitado para direita e a posição ao lado do elemento mais à                                   
+                return False                                                                       #esquerda não está vazia, então não dá para mexer
+            
+        elif(self.coordenadas[1] - 1 == self.coordenadas[3]):
+            if(self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] - 1] != " "):       #se está deitado para esquerda e a posição ao lado do elemento mais à                                   
+                return False                                                                       #esquerda não está vazia, então não dá para mexer
+
+                                                                                                     
         
         self.apagaBloco()
         i = 1
@@ -208,9 +236,13 @@ class BlocoI(Bloco):
             self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] + 1] != " ")):
                 return False
 
-        elif(self.coordenadas[0] == self.coordenadas[2]):  
-            if(self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] + 1] != " "):        #se está deitado e a posição ao lado do elemento mais à direita não                                 
-                return False                                                                        #está vazia, então não dá para mexer
+        elif(self.coordenadas[1] + 1 == self.coordenadas[3]):  
+            if(self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] + 1] != " "):      #se está deitado para direita e a posição ao lado do elemento mais à                                  
+                return False                                                                      #direita não está vazia, então não dá para mexer
+            
+        elif(self.coordenadas[1] - 1 == self.coordenadas[3]):  
+            if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1] + 1] != " "):      #se está deitado para esquerda e a posição ao lado do elemento mais à                                  
+                return False                                                                      #direita não está vazia, então não dá para mexer
                                                                                                     
         self.apagaBloco()
         i = 1
