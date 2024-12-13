@@ -36,11 +36,11 @@ class Partida :
 
             print(" ")
             tecla = readkey()
-            if(tecla==key.LEFT):
+            if tecla==key.LEFT:
                 self.__telaPartida.mover_esquerda()
-            elif (tecla==key.RIGHT):
+            elif tecla==key.RIGHT:
                 self.__telaPartida.mover_direta()
-            elif (tecla==key.DOWN):
+            elif tecla==key.DOWN:
                 result = self.__telaPartida.mover_baixo() 
                 if result== -2 :
                      return #perdeu

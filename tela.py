@@ -1,11 +1,12 @@
 import os
 from blocoi import BlocoI
-
-from blocoj import *
-from blocoo import *
-from blocos import *
-from blocoz import *
-from blocot import *
+from blocoj import BlocoJ
+from blocoo import BlocoO
+from blocos import BlocoS
+from blocoz import BlocoZ
+from blocot import BlocoT
+from blocol import BlocoL
+import random
 
 class Tela:
     def __init__(self,quantidadeL,quantidadeC):
@@ -44,30 +45,38 @@ class Tela:
 
 
     def adicionar_bloco(self):
-        """essa função a adiciona uma bloco na matrix"""
-        
+        """essa função a adiciona uma bloco na matrix
+            return Boolean : false se o bloco nao foi adicionado, true se foi
+        """
         #nosssas linha do jogo comeca no indice 1
         chance = random.uniform(0.01,1.0)
         #bloco aleatorio
-        if chance<=0.25:
+        if chance<=0.14:
             self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
-        elif 0.25<chance<=0.5:
+        elif 0.14<chance<=0.28:
             self.bloco_atual = BlocoJ(self.__matrixT) #crio o bloco de formato J
-        elif 0.5<chance<=0.75:
+        elif 0.28<chance<=0.42:
             self.bloco_atual = BlocoL(self.__matrixT) #crio o bloco de formato L
-        elif 0.75<chance:
+        elif 0.42<chance<=0.56:
             self.bloco_atual = BlocoO(self.__matrixT) #crio o bloco de formato L
-
-
+        elif 0.56<chance<=0.70:
+            self.bloco_atual = BlocoS(self.__matrixT)
+        elif 0.70<chance<=0.84:
+            self.bloco_atual = BlocoT(self.__matrixT)
+        else :
+            self.bloco_atual = BlocoZ(self.__matrixT)
     
         self.limparTela()
-
-        self.bloco_atual.gerarBloco()
-
+            #se nao gerou o bloco quer dizer que nao foi adicionado
+        if  not self.bloco_atual.gerarBloco(): 
+            return False
+        return True
+        
+    
 
     def __taganhanDoFilho(self):
         
-        """checka se alguma linha da matrix esta completa se estiver removemos as pecas dela
+        """checa se alguma linha da matrix esta completa se estiver removemos as pecas dela
             return : boolean(removeu a linha)
         """
         contador = 0 #ira contar quantas colunas em uma linha estao preenchidas
@@ -99,7 +108,6 @@ class Tela:
                     bau = self.__matrixT[l][c]
                     self.__matrixT[l][c] = j
                     j = bau
-
     
             return True
         return False
@@ -118,7 +126,9 @@ class Tela:
             return : -2 se o jogador perdeu , >=1 se o jogador apagou linhas , -1 se nao tem como ir para baixo
         """
         moveu = self.bloco_atual.ir_baixo()
+        
         if moveu==False:
+            
             midLinha = int ((len(self.__matrixT[0])-1)/2)
             if self.__matrixT[1][midLinha]!=" ":
                 return -2#verifica se o user perdeu a partida
@@ -127,7 +137,9 @@ class Tela:
                 w = self.__taganhanDoFilho()
                 if w ==True:
                     quntLinhas+=1
-            self.adicionar_bloco()
+            add = self.adicionar_bloco()
+            if add == False: #se for falso entao o jogador perdeu o jogo
+                return -2
             if quntLinhas>0:
                 return quntLinhas
         return -1
