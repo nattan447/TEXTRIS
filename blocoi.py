@@ -97,7 +97,7 @@ class BlocoI(Bloco):
                 return True
 
         elif(self.coordenadas[0] + 1 == self.coordenadas[2]):   #Caso em que a peça está de cabeça para baixo
-            if(self.coordenadas[3] + 1 >= len(self.matriz_referencia[0] - 1) or self.coordenadas[5] + 2 >= len(self.matriz_referencia[0] - 1) or self.coordenadas[7] + 3 >= len(self.matriz_referencia[0]) - 1): #Verifico se, após girar, a peça não sairá da tela
+            if(self.coordenadas[3] + 1 >= len(self.matriz_referencia[0])-1 or self.coordenadas[5] + 2 >= len(self.matriz_referencia[0] )-1 or self.coordenadas[7] + 3 >= len(self.matriz_referencia[0]))-1: #Verifico se, após girar, a peça não sairá da tela
                 return False
             elif(self.matriz_referencia[self.coordenadas[2] - 1][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4] - 2][self.coordenadas[5] + 2] != " " or self.matriz_referencia[self.coordenadas[6] - 3][self.coordenadas[7] + 3] != " "):
                 return False                                                #Verifico se está livre o espaço para a peça
