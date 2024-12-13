@@ -1,9 +1,12 @@
 import os
 from blocoi import BlocoI
-from blocoj import BlocoJ
-from blocol import BlocoL
-from blocoo import BlocoO
-import random
+
+from blocoj import *
+from blocoo import *
+from blocos import *
+from blocoz import *
+from blocot import *
+
 class Tela:
     def __init__(self,quantidadeL,quantidadeC):
         self.__quantidadeL = quantidadeL
@@ -54,6 +57,7 @@ class Tela:
             self.bloco_atual = BlocoL(self.__matrixT) #crio o bloco de formato L
         elif 0.75<chance:
             self.bloco_atual = BlocoO(self.__matrixT) #crio o bloco de formato L
+
 
     
         self.limparTela()
