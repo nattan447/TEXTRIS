@@ -1,8 +1,2 @@
-from readchar import readkey, key
-
-
-
-
-while True:
-    tecla = readkey()
-    print(tecla)
+for i in range(10,0,-1):
+    print(i)

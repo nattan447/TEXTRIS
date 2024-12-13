@@ -16,6 +16,18 @@ class Partida :
          """
          self.__controlar_partida()
          
+    def __perdeu_partida(self):
+         
+         """
+         interface de quando o usuario perde parida
+         """
+         print("você perdeu o jogo :( , pressione 's' para voltar ao menu principal")
+         while True:
+              
+
+              tecla = readkey()
+    
+
 
     def __mostrar_infos(self):
         """mostra as keys disponiveis para o jogador e seua pontuacao"""
@@ -31,6 +43,7 @@ class Partida :
         '''essa funcao disponibiliza o usuario a controlar como sua partida ira prosseguir'''
         
         self.__telaPartida.mostrar_tela()
+        
         while True:
             self.__mostrar_infos()
 
@@ -41,13 +54,18 @@ class Partida :
             elif tecla==key.RIGHT:
                 self.__telaPartida.mover_direta()
             elif tecla==key.DOWN:
-                result = self.__telaPartida.mover_baixo() 
-                if result== -2 :
-                     return #perdeu
-                if result>=1 :
-                     self.pontuacao+= result*100
+                moveu = self.__telaPartida.mover_baixo() 
+                
+                if moveu == False :
+                     linhasremovidas = self.__telaPartida.remover_linhas()
+                     if linhasremovidas>0:
+                          self.pontuacao += 100*linhasremovidas
+                     adicionou = self.__telaPartida.adicionar_bloco()
+                     if adicionou== False:
+                          return #nao adicionou o bloco => jogador perdeu                
                 else:
-                    self.pontuacao+= 2#toda hr q o cara conseguir mover para baixo aumenta a pontu
+                     self.pontuacao+=2
+
                      
             elif tecla==key.PAGE_UP:
                  self.__telaPartida.rotacionar_direita()

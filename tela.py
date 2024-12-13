@@ -65,6 +65,7 @@ class Tela:
             self.bloco_atual = BlocoT(self.__matrixT)
         else :
             self.bloco_atual = BlocoZ(self.__matrixT)
+        # self.bloco_atual = BlocoI(self.__matrixT)
     
         self.limparTela()
             #se nao gerou o bloco quer dizer que nao foi adicionado
@@ -72,7 +73,16 @@ class Tela:
             return False
         return True
         
-    
+    def remover_linhas(self):
+        """
+        remove todas linhas que estao completas e retorna a quantidade de linhas removidas
+        return : int
+        """
+        quantd = 0
+        for i in range(0,len(self.__matrixT)-2):
+              if self.__taganhanDoFilho() :
+                  quantd+=1
+        return quantd
 
     def __taganhanDoFilho(self):
         
@@ -101,14 +111,26 @@ class Tela:
         elif(linhaRemover>1):
             #linha maior q 1 preenchida - > coloque o que esta em cima para baixo
             linhadesce = linhaRemover -1
-
+        
             for c in range(1,self.__quantidadeC+1):
                 j = " "
+                    
                 for l in range(1,linhaRemover+1):
                     bau = self.__matrixT[l][c]
                     self.__matrixT[l][c] = j
                     j = bau
-    
+                until = linhaRemover+1
+                while until<=self.__quantidadeL and self.__matrixT[until][c]==" ":
+                    until+=1
+                while until is not linhaRemover+1:
+                    for l in range(until-1,1,-1):
+                        sobe = self.__matrixT[l][c]
+                        if self.__matrixT[l-1][c] is not " ":
+                            self.__matrixT[l][c] = self.__matrixT[l-1][c]
+                            self.__matrixT[l-1][c] = sobe
+                    until+= -1 
+
+            
             return True
         return False
 
@@ -120,29 +142,17 @@ class Tela:
         """move bloco atual para a direita da tela"""
         self.bloco_atual.ir_direita()
     
+
     def mover_baixo(self):
-        """move bloco atual para baixo da tela retorna verdadeiro se consguiu mover para baixo
+        """move bloco atual para baixo da tela retorna true se consguiu mover para baixo , senao retorna false
         
-            return : -2 se o jogador perdeu , >=1 se o jogador apagou linhas , -1 se nao tem como ir para baixo
+            return : boolean
         """
         moveu = self.bloco_atual.ir_baixo()
-        
-        if moveu==False:
-            
-            midLinha = int ((len(self.__matrixT[0])-1)/2)
-            if self.__matrixT[1][midLinha]!=" ":
-                return -2#verifica se o user perdeu a partida
-            quntLinhas = 0
-            for i in range(0,len(self.__matrixT)-2):
-                w = self.__taganhanDoFilho()
-                if w ==True:
-                    quntLinhas+=1
-            add = self.adicionar_bloco()
-            if add == False: #se for falso entao o jogador perdeu o jogo
-                return -2
-            if quntLinhas>0:
-                return quntLinhas
-        return -1
+        if not moveu:                    
+            return False
+        return True
+                    
             
 
     def rotacionar_esquerda(self):
