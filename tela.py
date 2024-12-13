@@ -1,6 +1,10 @@
 import os
 from blocoi import BlocoI
-
+from blocoj import *
+from blocoo import *
+from blocos import *
+from blocoz import *
+from blocot import *
 
 class Tela:
     def __init__(self,quantidadeL,quantidadeC):
@@ -43,7 +47,7 @@ class Tela:
         
         #nosssas linha do jogo comeca no indice 1
 
-        self.bloco_atual = BlocoI(self.__matrixT) #crio o bloco de formato I
+        self.bloco_atual = BlocoT(self.__matrixT) #crio o bloco de formato I
     
         self.limparTela()
 

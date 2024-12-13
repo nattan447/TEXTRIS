@@ -1,8 +1,11 @@
 from bloco import Bloco
 
-
+##
+# \brief Esta classe implementa um bloco do tipo L
 class BlocoL(Bloco):
-    
+    ##
+    # \brief gera uma peça nas coordenadas atuais. Caso elas sejam 0, gera uma peça na posição inicial do jogo
+    # \return True caso conseguiu gerar a peça, ou False caso não conseguiu
     def gerarBloco(self):
         """
         essa função gera um bloco nas coordenadas específicas da tela
@@ -22,11 +25,21 @@ class BlocoL(Bloco):
                 j = j + 1
             self.coordenadas[6] = 3
 
+        if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1]] != " " or
+        self.matriz_referencia[self.coordenadas[2]][self.coordenadas[3]] != " " or
+        self.matriz_referencia[self.coordenadas[4]][self.coordenadas[5]] != " " or
+        self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7]] != " "):
+            return False
+
         self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1]] = "#"
         self.matriz_referencia[self.coordenadas[2]][self.coordenadas[3]] = "#"
         self.matriz_referencia[self.coordenadas[4]][self.coordenadas[5]] = "#"
         self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7]] = "#"
+        return True
 
+    ##
+    # \brief apaga a peça que está nas coordenadas atuais
+    # \return nenhum
     def apagaBloco(self):
         """
         essa função apaga um bloco nas coordenadas específicas da tela
@@ -36,6 +49,9 @@ class BlocoL(Bloco):
         self.matriz_referencia[self.coordenadas[4]][self.coordenadas[5]] = " "
         self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7]] = " "
       
+    ##
+    # \brief rotaciona a peça atual para a esquerda
+    # \return True caso conseguiu rotacionar a peça, ou False caso não conseguiu 
     def rotacionar_esquerda(self):
         if(self.coordenadas[5] + 1 == self.coordenadas[3]):     #Caso em que a peça está deitada para a direita
             if(self.coordenadas[0] - 2 <= 0):       #Verifico se é possível girar a peça
@@ -113,6 +129,9 @@ class BlocoL(Bloco):
                 self.gerarBloco()
                 return True
 
+    ##
+    # \brief rotaciona a peça atual para a direita
+    # \return True caso conseguiu rotacionar a peça, ou False caso não conseguiu
     def rotacionar_direita(self):
         if(self.coordenadas[5] + 1 == self.coordenadas[3]):     #Caso em que a peça está deitada para a direita
             if(self.coordenadas[0] + 2 >= len(self.matriz_referencia) - 1 or self.coordenadas[7] - 1 <= 0):       #Verifico se é possível girar a peça
@@ -190,6 +209,9 @@ class BlocoL(Bloco):
                 self.gerarBloco()
                 return True
 
+    ##
+    # \brief move a peça atual para baixo
+    # \return True caso conseguiu mover a peça, ou False caso não conseguiu
     def ir_baixo(self):
 
         if(self.coordenadas[5] - 1 == self.coordenadas[7]):
@@ -222,6 +244,9 @@ class BlocoL(Bloco):
 
         return True 
 
+    ##
+    # \brief move a peça atual para esquerda
+    # \return True caso conseguiu mover a peça, ou False caso não conseguiu
     def ir_esquerda(self):
         if(self.coordenadas[5] - 1 == self.coordenadas[7]):                           #Caso em que está de ponta cabeça e nao podemos mover para esquerda
             if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1] - 1] != " " or self.matriz_referencia[self.coordenadas[2]][self.coordenadas[3] - 1] != " " or self.matriz_referencia[self.coordenadas[6]][self.coordenadas[7] - 1] != " "):   
@@ -249,6 +274,9 @@ class BlocoL(Bloco):
             i = i + 2  
         self.gerarBloco()
 
+    ##
+    # \brief move a peça atual para direita
+    # \return True caso conseguiu mover a peça, ou False caso não conseguiu 
     def ir_direita(self):
         if(self.coordenadas[5] - 1 == self.coordenadas[7]):                           #Caso em que está de ponta cabeça e nao podemos mover para direita
             if(self.matriz_referencia[self.coordenadas[0]][self.coordenadas[1] + 1] != " " or self.matriz_referencia[self.coordenadas[2]][self.coordenadas[3] + 1] != " " or self.matriz_referencia[self.coordenadas[4]][self.coordenadas[5] + 1] != " "):   
