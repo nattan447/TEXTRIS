@@ -14,7 +14,7 @@ simulando , assim , o jogo Tetris , porém adptado também ao terminal.
 5 - readchar
 OBS: O programa foi executado em python3.10.12 , Linux Mint 21.3.
 
-## SIGA OS SEGUINTES PASSOS PARA A EXECUÇÃO H2
+## SIGA OS SEGUINTES PASSOS PARA A EXECUÇÃO 
 Linux :
 - sudo apt install readchar
 - sudo apt install pytest
