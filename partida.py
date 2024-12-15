@@ -4,31 +4,41 @@ from readchar import readkey, key
 from  tela import Tela
 import  os
 
+
+##
+# \brief Esta classe implementa a Paritda do nosso jogo
 class Partida :
+    ##
+    # \brief Construtor. inicia o nome do jogador , pontuação e a tela da partida como vazio
     def __init__(self,nome_jogador,pontuacao):
         self.nome_jogador = nome_jogador
         self.pontuacao = pontuacao
         self.__telaPartida = None
 
+
+    ##
+    # \brief inicia uma Partida que foi salva antes
     def init_part_carregada(self):
          """
             carrega uma partida salva anteriormente
          """
          self.__controlar_partida()
-         
+    ##
+    # \brief Inicia a iterface quando o usuario perde a partida        
     def __perdeu_partida(self):
-         
          """
          interface de quando o usuario perde parida
          """
-         print("você perdeu o jogo :( , pressione 's' para voltar ao menu principal")
+         print("você perdeu o jogo :(")
+         print("pontuação : " + str(self.pontuacao))
+         print("pressione 's' para voltar ao menu principal")
          while True:
-              
-
               tecla = readkey()
-    
+              if tecla=='s':
+                   return    
 
-
+    ##
+    # \brief Mostra as informacoes da partida atual
     def __mostrar_infos(self):
         """mostra as keys disponiveis para o jogador e seua pontuacao"""
         
@@ -38,12 +48,11 @@ class Partida :
         print("<Page Down> rotaciona esquerda | <Page Up> rotaciona direita")
         print("<s> sai da partida, <g> grava e sai da partida")
 
-
+    ##
+    # \brief Permite ao jogador controlar o estado da parida
     def __controlar_partida(self):
         '''essa funcao disponibiliza o usuario a controlar como sua partida ira prosseguir'''
-        
         self.__telaPartida.mostrar_tela()
-        
         while True:
             self.__mostrar_infos()
 
@@ -62,6 +71,7 @@ class Partida :
                           self.pontuacao += 100*linhasremovidas
                      adicionou = self.__telaPartida.adicionar_bloco()
                      if adicionou== False:
+                          self.__perdeu_partida() 
                           return #nao adicionou o bloco => jogador perdeu                
                 else:
                      self.pontuacao+=2
@@ -82,19 +92,26 @@ class Partida :
                 return
             self.__telaPartida.mostrar_tela()
          
-
+    ##
+    # \brief Inicia a partida
+    # \param  inteiros com quantidade de linhas da tela e quantidade colunas da tela,respectivamente
     def iniciar_partida(self,quantidadeL,quantidadeC):
         """ essa função inicia a  partida criando uma tela
             quantidadeL : quantidade de linhas da tela
             quantidadeC : quantidade colunas da tela
         """
+        if quantidadeC<=2 and quantidadeL<=2:
+             self.__perdeu_partida()
+             return
+            
         self.__telaPartida = Tela(quantidadeL,quantidadeC)
         
         self.__telaPartida.adicionar_bloco()
     
         self.__controlar_partida()
 
-    
+    ##
+    # \brief Salva a partida atual em um arquivo
     def __salvar_partida(self):
               """
               salva o objeto da partida atual em um arquivo com nome sendo : nome_jogador+dataAtual

@@ -1,0 +1,9 @@
+GENERATE_LATEX = NO
+OUTPUT_LANGUAGE = Brazilian
+GENERATE_TREEVIEW = YES
+INPUT = blocos/bloco.py blocos/blocoi.py blocos/blocoj.py blocos/blocol.py blocos/blocoo.py blocos/blocos.py blocos/blocot.py blocos/blocoz .py jogo.py partida.py tela.py 
+EXTRACT_ALL = YES
+HAVE_DOT = YES
+DOT_PATH = /usr/bin/dot
+UML_LOOK = YES
+OPTIMIZE_OUTPUT_FOR_C = NO
