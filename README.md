@@ -1,6 +1,8 @@
 # AUTORES
-AUTOR1 : Nome : Nattan Ferreira da Silva , NUSP : 15520641, email : nattanferreira@usp.br
-AUTOR2 : Nome : Leonardo César da Silva Francisco ,NUSP : 15468897, email : leonardocesar@usp.br
+### AUTOR1 
+Nome : Nattan Ferreira da Silva , NUSP : 15520641, email : nattanferreira@usp.br
+### AUTOR2 
+Nome : Leonardo César da Silva Francisco ,NUSP : 15468897, email : leonardocesar@usp.br
 
 
 # TEXTRIS  
