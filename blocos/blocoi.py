@@ -1,4 +1,4 @@
-from bloco import Bloco
+from blocos.bloco import Bloco
 
 ##
 # \brief Esta classe implementa um bloco do tipo I
